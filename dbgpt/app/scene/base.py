@@ -25,8 +25,8 @@ class Scene:
 class ChatScene(Enum):
     ChatWithDbExecute = Scene(
         code="chat_with_db_execute",
-        name="Chat Data",
-        describe="Dialogue with your private data through natural language.",
+        name="数据对话",
+        describe="通过自然语言与数据进行对话，目前主要是结构化与半结构化数据的对话，可以辅助做数据分析与洞察。 ",
         param_types=["DB Select"],
     )
     ExcelLearning = Scene(
@@ -37,16 +37,16 @@ class ChatScene(Enum):
     )
     ChatExcel = Scene(
         code="chat_excel",
-        name="Chat Excel",
-        describe="Dialogue with your excel, use natural language.",
+        name="Excel对话",
+        describe="通过自然语言对话的方式，实现Excel数据的解读与分析。",
         param_types=["File Select"],
         prepare_scene_code="excel_learning",
     )
 
     ChatWithDbQA = Scene(
         code="chat_with_db_qa",
-        name="Chat DB",
-        describe="Have a Professional Conversation with Metadata.",
+        name="数据库对话",
+        describe="通过与数据库对话完成数据库性能分析、优化等工作, 当前ChatDB只有一些基础的能力，后面会随着社区的迭代，逐步增强。",
         param_types=["DB Select"],
     )
     ChatExecution = Scene(
@@ -58,8 +58,8 @@ class ChatScene(Enum):
 
     ChatAgent = Scene(
         code="chat_agent",
-        name="Agent Chat",
-        describe="Use tools through dialogue to accomplish your goals.",
+        name="插件",
+        describe="支持基本的插件仓库与插件拓展的能力。 项目内置一个搜索插件。",
         param_types=["Plugin Select"],
     )
 
@@ -72,14 +72,14 @@ class ChatScene(Enum):
     )
     ChatDashboard = Scene(
         "chat_dashboard",
-        "Dashboard",
-        "Provide you with professional analysis reports through natural language.",
+        "报表分析",
+        "通过自然语言进行智能的报表生成与分析，实现生成式BI(GBI)，说说话就可以把数据看板做出来。",
         ["DB Select"],
     )
     ChatKnowledge = Scene(
         "chat_knowledge",
-        "Chat Knowledge",
-        "Dialogue through natural language and private documents and knowledge bases.",
+        "知识库对话",
+        "知识库提供了根据私域知识问答的能力，可以根据知识库构建智能问答系统、阅读助手等多种产品，使用RAG的技术，对知识检索进行增强。 ",
         ["Knowledge Space Select"],
     )
     ExtractTriplet = Scene(

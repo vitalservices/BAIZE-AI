@@ -32,7 +32,7 @@ def async_db_summary(system_app: SystemApp):
 
 
 def server_init(param: "WebServerParameters", system_app: SystemApp):
-    from dbgpt.agent.plugin.commands.command_mange import CommandRegistry
+    from dbgpt.agent.commands.command_mange import CommandRegistry
 
     # logger.info(f"args: {args}")
 
@@ -40,15 +40,15 @@ def server_init(param: "WebServerParameters", system_app: SystemApp):
     cfg = Config()
     cfg.SYSTEM_APP = system_app
     # Initialize db storage first
-    _initialize_db_storage(param, system_app)
+    _initialize_db_storage(param)
 
     # load_native_plugins(cfg)
     signal.signal(signal.SIGINT, signal_handler)
 
     # Loader plugins and commands
     command_categories = [
-        "dbgpt.agent.plugin.commands.built_in.audio_text",
-        "dbgpt.agent.plugin.commands.built_in.image_gen",
+        "dbgpt.agent.commands.built_in.audio_text",
+        "dbgpt.agent.commands.built_in.image_gen",
     ]
     # exclude commands
     command_categories = [
@@ -61,9 +61,9 @@ def server_init(param: "WebServerParameters", system_app: SystemApp):
     cfg.command_registry = command_registry
 
     command_disply_commands = [
-        "dbgpt.agent.plugin.commands.built_in.disply_type.show_chart_gen",
-        "dbgpt.agent.plugin.commands.built_in.disply_type.show_table_gen",
-        "dbgpt.agent.plugin.commands.built_in.disply_type.show_text_gen",
+        "dbgpt.agent.commands.disply_type.show_chart_gen",
+        "dbgpt.agent.commands.disply_type.show_table_gen",
+        "dbgpt.agent.commands.disply_type.show_text_gen",
     ]
     command_disply_registry = CommandRegistry()
     for command in command_disply_commands:
@@ -86,14 +86,12 @@ def _create_model_start_listener(system_app: SystemApp):
     return startup_event
 
 
-def _initialize_db_storage(param: "WebServerParameters", system_app: SystemApp):
+def _initialize_db_storage(param: "WebServerParameters"):
     """Initialize the db storage.
 
     Now just support sqlite and mysql. If db type is sqlite, the db path is `pilot/meta_data/{db_name}.db`.
     """
-    _initialize_db(
-        try_to_create_db=not param.disable_alembic_upgrade, system_app=system_app
-    )
+    _initialize_db(try_to_create_db=not param.disable_alembic_upgrade)
 
 
 def _migration_db_storage(param: "WebServerParameters"):
@@ -116,9 +114,7 @@ def _migration_db_storage(param: "WebServerParameters"):
         _ddl_init_and_upgrade(default_meta_data_path, param.disable_alembic_upgrade)
 
 
-def _initialize_db(
-    try_to_create_db: Optional[bool] = False, system_app: Optional[SystemApp] = None
-) -> str:
+def _initialize_db(try_to_create_db: Optional[bool] = False) -> str:
     """Initialize the database
 
     Now just support sqlite and mysql. If db type is sqlite, the db path is `pilot/meta_data/{db_name}.db`.
@@ -137,7 +133,7 @@ def _initialize_db(
             f"{urlquote(CFG.LOCAL_DB_PASSWORD)}@"
             f"{CFG.LOCAL_DB_HOST}:"
             f"{str(CFG.LOCAL_DB_PORT)}/"
-            f"{db_name}?charset=utf8mb4"
+            f"{db_name}?charset=utf8mb4&collation=utf8mb4_unicode_ci"
         )
         # Try to create database, if failed, will raise exception
         _create_mysql_database(db_name, db_url, try_to_create_db)
@@ -151,11 +147,7 @@ def _initialize_db(
         "pool_recycle": 3600,
         "pool_pre_ping": True,
     }
-    db = initialize_db(db_url, db_name, engine_args)
-    if system_app:
-        from dbgpt.storage.metadata import UnifiedDBManagerFactory
-
-        system_app.register(UnifiedDBManagerFactory, db)
+    initialize_db(db_url, db_name, engine_args)
     return default_meta_data_path
 
 
@@ -172,11 +164,12 @@ def _create_mysql_database(db_name: str, db_url: str, try_to_create_db: bool = F
     """
     from sqlalchemy import create_engine, DDL
     from sqlalchemy.exc import SQLAlchemyError, OperationalError
+    from sqlalchemy import create_engine, pool  
 
     if not try_to_create_db:
         logger.info(f"Skipping creation of database {db_name}")
         return
-    engine = create_engine(db_url)
+    engine = create_engine(db_url, poolclass=pool.QueuePool, pool_size=10, max_overflow=20, pool_timeout=30, pool_recycle=3600)  # pool_recycle 是关键设置，它指定了在多少秒后自动回收连接
 
     try:
         # Try to connect to the database
@@ -279,11 +272,5 @@ class WebServerParameters(BaseParameters):
         default=False,
         metadata={
             "help": "Whether to disable alembic to initialize and upgrade database metadata",
-        },
-    )
-    awel_dirs: Optional[str] = field(
-        default=None,
-        metadata={
-            "help": "The directories to search awel files, split by `,`",
         },
     )
