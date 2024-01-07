@@ -180,3 +180,5 @@ thirdparty
 # typescript
 *.tsbuildinfo
 /web/next-env.d.ts
+
+DOCKER-GPT/

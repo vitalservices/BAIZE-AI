@@ -1,4 +1,4 @@
-ARG BASE_IMAGE="eosphorosai/dbgpt:latest"
+ARG BASE_IMAGE="baizeai/baize-ai:latest"
 
 FROM ${BASE_IMAGE}
 
@@ -19,7 +19,7 @@ RUN sed -i 's/bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/g' /etc/mysql/
 RUN mkdir /docker-entrypoint-initdb.d \
     && echo "USE mysql;\nUPDATE user SET Host='%' WHERE User='root';\nFLUSH PRIVILEGES;" > /docker-entrypoint-initdb.d/init.sql
 
-ENV MYSQL_ROOT_PASSWORD=aa123456
+ENV MYSQL_ROOT_PASSWORD=mysql123456
 ENV LOCAL_DB_PASSWORD="$MYSQL_ROOT_PASSWORD"
 
 RUN cp /app/assets/schema/knowledge_management.sql /docker-entrypoint-initdb.d/

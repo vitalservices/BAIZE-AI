@@ -8,7 +8,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y git pyth
 
 ARG BUILD_LOCAL_CODE="false"
 ARG LANGUAGE="en"
-ARG PIP_INDEX_URL="https://pypi.org/simple"
+ARG PIP_INDEX_URL="https://pypi.tuna.tsinghua.edu.cn/simple/"
 ENV PIP_INDEX_URL=$PIP_INDEX_URL
 
 ARG DB_GPT_INSTALL_MODEL="default"
@@ -33,8 +33,8 @@ RUN pip3 install --upgrade pip -i $PIP_INDEX_URL \
     && pip3 install -i $PIP_INDEX_URL ".[openai]"
 
 RUN (if [ "${LANGUAGE}" = "zh" ]; \
-        # language is zh, download zh_core_web_sm from github
-        then wget https://github.com/explosion/spacy-models/releases/download/zh_core_web_sm-3.5.0/zh_core_web_sm-3.5.0-py3-none-any.whl -O /tmp/zh_core_web_sm-3.5.0-py3-none-any.whl \
+        # language is zh, download zh_core_web_sm from nextvshow
+        then wget https://static.nextv.show/github/zh_core_web_sm-3.5.0-py3-none-any.whl -O /tmp/zh_core_web_sm-3.5.0-py3-none-any.whl \
         && pip3 install /tmp/zh_core_web_sm-3.5.0-py3-none-any.whl -i $PIP_INDEX_URL \
         && rm /tmp/zh_core_web_sm-3.5.0-py3-none-any.whl; \
         # not zh, download directly
