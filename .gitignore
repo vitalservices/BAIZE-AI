@@ -181,4 +181,6 @@ thirdparty
 *.tsbuildinfo
 /web/next-env.d.ts
 
-DOCKER-GPT/
+# docker files
+Dockerfile
+baizeai/

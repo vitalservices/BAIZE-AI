@@ -3,9 +3,9 @@ ARG BASE_IMAGE="baizeai/baize-ai:latest"
 FROM ${BASE_IMAGE}
 
 RUN apt-get update && apt-get install -y wget gnupg lsb-release net-tools
-
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 467B942D3A79BD29
-
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5072E1F5
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys B7B3B788A8D3785C
+RUN apt-get update && apt-get install -y mysql-server && apt-get clean
 RUN wget https://dev.mysql.com/get/mysql-apt-config_0.8.17-1_all.deb
 RUN dpkg -i mysql-apt-config_0.8.17-1_all.deb
 
