@@ -31,6 +31,7 @@ RUN pip3 install --upgrade pip -i $PIP_INDEX_URL \
     && pip3 install -i $PIP_INDEX_URL ".[$DB_GPT_INSTALL_MODEL]" \
     # install openai for proxyllm
     && pip3 install -i $PIP_INDEX_URL ".[openai]"
+RUN pip install cryptography
 
 RUN (if [ "${LANGUAGE}" = "zh" ]; \
         # language is zh, download zh_core_web_sm from nextvshow

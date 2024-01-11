@@ -1,9 +1,9 @@
--- You can change `dbgpt` to your actual metadata database name in your `.env` file
--- eg. `LOCAL_DB_NAME=dbgpt`
+-- You can change `baizeai` to your actual metadata database name in your `.env` file
+-- eg. `LOCAL_DB_NAME=baizeai`
 
 CREATE
-DATABASE IF NOT EXISTS dbgpt;
-use dbgpt;
+DATABASE IF NOT EXISTS baizeai;
+use baizeai;
 
 -- For alembic migration tool
 CREATE TABLE IF NOT EXISTS `alembic_version`

@@ -69,7 +69,7 @@ LLM_MODEL_CONFIG = {
     "baichuan-13b": os.path.join(MODEL_PATH, "Baichuan-13B-Chat"),
     # please rename "fireballoon/baichuan-vicuna-chinese-7b" to "baichuan-7b"
     "baichuan-7b": os.path.join(MODEL_PATH, "baichuan-7b"),
-    "baichuan2-7b": os.path.join(MODEL_PATH, "Baichuan2-7B-Chat"),
+    "baichuan2-7b": os.path.join(MODEL_PATH, "Baichuan2-7B-Chat-4bit"),
     "baichuan2-13b": os.path.join(MODEL_PATH, "Baichuan2-13B-Chat"),
     # https://huggingface.co/Qwen/Qwen-7B-Chat
     "qwen-7b-chat": os.path.join(MODEL_PATH, "Qwen-7B-Chat"),

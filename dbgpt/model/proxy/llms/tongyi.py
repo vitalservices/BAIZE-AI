@@ -50,7 +50,7 @@ def tongyi_generate_stream(
 
     proxyllm_backend = model_params.proxyllm_backend
     if not proxyllm_backend:
-        proxyllm_backend = Generation.Models.qwen_turbo  # By Default qwen_turbo
+        proxyllm_backend = Generation.Models.qwen_max  # 缺省由qwen_turbo修改为qwen_max，当前免费使用
 
     messages: List[ModelMessage] = params["messages"]
     convert_to_compatible_format = params.get("convert_to_compatible_format", False)

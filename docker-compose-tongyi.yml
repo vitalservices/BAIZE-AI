@@ -1,0 +1,71 @@
+version: '3.10'
+
+services:
+  db:
+    image: mysql/mysql-server
+    environment:
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'mysql123456'
+    ports:
+      - 3306:3306
+    volumes:
+      - db-data:/var/lib/mysql  
+      - ./docker/examples/my.cnf:/etc/my.cnf
+      - ./docker/examples/sqls:/docker-entrypoint-initdb.d
+      - ./assets/schema/knowledge_management.sql:/docker-entrypoint-initdb.d/knowledge_management.sql
+    restart: unless-stopped
+    networks:
+      - dbgptnet
+  webserver:
+    image: baizeai/baize-ai:latest
+    command: dbgpt start webserver 
+    #--disable_alembic_upgrade
+    environment:
+      - LOCAL_DB_TYPE=mysql    
+      - LOCAL_DB_HOST=db
+      - LOCAL_DB_PASSWORD=mysql123456
+      - ALLOWLISTED_PLUGINS=db_dashboard
+      # 本地LLM模型
+      #- LLM_MODEL=baichuan2-7b
+      # proxyllm chatgpt
+      #- LLM_MODEL=proxyllm
+      #- PROXY_API_KEY=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
+      #- PROXY_SERVER_URL=https://openai-proxy-6kf.pages.dev/v1/chat/completions
+      # proxyllm tongyi_proxyllm
+      - LLM_MODEL=tongyi_proxyllm
+      - PROXY_API_KEY=sk-1aa230e037da496da22eb0fe46b3580a
+      - PROXY_SERVER_URL=https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation
+      - LANGUAGE=zh
+    depends_on:
+      - db
+    volumes:
+      - app-data:/data  
+      # Please modify it to your own model directory
+      - ./models:/app/models
+      - pilot-data:/app/pilot/data  
+      - pilot-message:/app/pilot/message  
+    env_file:
+      - .env.template
+    ports:
+      - 5000:5000/tcp
+    # webserver may be failed, it must wait all sqls in /docker-entrypoint-initdb.d execute finish.
+    restart: unless-stopped
+    networks:
+      - dbgptnet
+    ipc: host
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
+volumes:
+  db-data:  
+  app-data:  
+  pilot-data:  
+  pilot-message:  
+networks:
+  dbgptnet:
+    driver: bridge
+    name: dbgptnet

@@ -4,8 +4,8 @@ services:
   db:
     image: mysql/mysql-server
     environment:
-      MYSQL_USER: 'root'
-      MYSQL_PASSWORD: 'mysql123456'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
       MYSQL_ROOT_PASSWORD: 'mysql123456'
     ports:
       - 3306:3306
@@ -16,43 +16,20 @@ services:
       - ./assets/schema/knowledge_management.sql:/docker-entrypoint-initdb.d/knowledge_management.sql
     restart: unless-stopped
     networks:
-      - baizenet
+      - dbgptnet
   webserver:
     image: baizeai/baize-ai:latest
     command: python3 dbgpt/app/dbgpt_server.py --disable_alembic_upgrade
     environment:
-      # DATABASE SETTINGS
-      - LOCAL_DB_TYPE=mysql
-      - LOCAL_DB_USER=root
-      - LOCAL_DB_PASSWORD=mysql123456
       - LOCAL_DB_HOST=db
-      - LOCAL_DB_PORT=3306
-      - LOCAL_DB_NAME=baizeai
-      # ALLOWLISTED PLUGINS
+      - LOCAL_DB_PASSWORD=mysql123456
       - ALLOWLISTED_PLUGINS=db_dashboard
-      # LLM MODELS
-      - LLM_MODEL=tongyi_proxyllm
-      - TONGYI_PROXY_API_KEY=sk-1aa230e037da496da22eb0fe46b3580a
+      # 本地LLM模型
+      # - LLM_MODEL=vicuna-13b-v1.5
+      # proxyllm chatgpt
+      - LLM_MODEL=proxyllm
+      - PROXY_API_KEY=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
       - PROXY_SERVER_URL=https://openai-proxy-6kf.pages.dev/v1/chat/completions
-      - MODEL_SERVER=http://127.0.0.1:8000
-      - LIMIT_MODEL_CONCURRENCY=5
-      - MAX_POSITION_EMBEDDINGS=4096
-      # EMBEDDING SETTINGS EMBEDDING MODELS
-      - EMBEDDING_MODEL=bge-large-zh
-      - KNOWLEDGE_CHUNK_SIZE=500
-      - KNOWLEDGE_SEARCH_TOP_SIZE=5
-      # EMBEDDING SETTINGS Control whether to display the source document of knowledge on the front end.
-      - KNOWLEDGE_CHAT_SHOW_RELATIONS=False
-      # EMBEDDING SETTINGS Whether to enable Chat Knowledge Search Rewrite Mode
-      - KNOWLEDGE_SEARCH_REWRITE=False
-      # COMMANDS
-      - EXECUTE_LOCAL_COMMANDS=False
-      ### Chroma vector db config
-      - VECTOR_STORE_TYPE=Chroma
-      # SUMMARY_CONFIG                                             **#
-      - SUMMARY_CONFIG=FAST
-      # LOG FATAL, ERROR, WARNING, WARNING, INFO, DEBUG, NOTSET
-      - DBGPT_LOG_LEVEL=INFO
       - LANGUAGE=zh
     depends_on:
       - db
@@ -62,14 +39,14 @@ services:
       - ./models:/app/models
       - pilot-data:/app/pilot/data  
       - pilot-message:/app/pilot/message  
-    #env_file:
-    #  - .env.template
+    env_file:
+      - .env.template
     ports:
       - 5000:5000/tcp
     # webserver may be failed, it must wait all sqls in /docker-entrypoint-initdb.d execute finish.
     restart: unless-stopped
     networks:
-      - baizenet
+      - dbgptnet
     ipc: host
     deploy:
       resources:
@@ -83,6 +60,6 @@ volumes:
   pilot-data:  
   pilot-message:  
 networks:
-  baizenet:
+  dbgptnet:
     driver: bridge
-    name: baizenet
+    name: dbgptnet
