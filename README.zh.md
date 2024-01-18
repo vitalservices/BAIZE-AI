@@ -1,43 +1,12 @@
-# DB-GPT: 用私有化LLM技术定义数据库下一代交互方式
+# 白泽智语: 用私有化LLM技术定义下一代交互方式
 
 <p align="left">
   <img src="./assets/LOGO.png" width="100%" />
 </p>
 
 
-<div align="center">
-  <p>
-    <a href="https://github.com/eosphoros-ai/DB-GPT">
-        <img alt="stars" src="https://img.shields.io/github/stars/csunny/db-gpt?style=social" />
-    </a>
-    <a href="https://github.com/eosphoros-ai/DB-GPT">
-        <img alt="forks" src="https://img.shields.io/github/forks/csunny/db-gpt?style=social" />
-    </a>
-    <a href="https://opensource.org/licenses/MIT">
-      <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
-    </a>
-     <a href="https://github.com/eosphoros-ai/DB-GPT/releases">
-      <img alt="Release Notes" src="https://img.shields.io/github/release/csunny/DB-GPT" />
-    </a>
-    <a href="https://github.com/eosphoros-ai/DB-GPT/issues">
-      <img alt="Open Issues" src="https://img.shields.io/github/issues-raw/csunny/DB-GPT" />
-    </a>
-    <a href="https://discord.gg/7uQnPuveTY">
-      <img alt="Discord" src="https://dcbadge.vercel.app/api/server/7uQnPuveTY?compact=true&style=flat" />
-    </a>
-    <a href="https://join.slack.com/t/slack-inu2564/shared_invite/zt-29rcnyw2b-N~ubOD9kFc7b7MDOAM1otA">
-      <img alt="Slack" src="https://badgen.net/badge/Slack/Join%20DB-GPT/0abd59?icon=slack" />
-    </a>
-    <a href="https://codespaces.new/eosphoros-ai/DB-GPT">
-      <img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" />
-    </a>
-  </p>
-
-[**English**](README.md) | [**Discord**](https://discord.gg/7uQnPuveTY) | [**文档**](https://www.yuque.com/eosphoros/dbgpt-docs/bex30nsv60ru0fmx) | [**微信**](https://github.com/csunny/DB-GPT/blob/main/README.zh.md#%E8%81%94%E7%B3%BB%E6%88%91%E4%BB%AC) | [**社区**](https://github.com/eosphoros-ai/community) | [**Paper**](https://arxiv.org/pdf/2312.17449.pdf)
-</div>
-
-## DB-GPT 是什么？
-DB-GPT是一个开源的数据库领域大模型框架。目的是构建大模型领域的基础设施，通过开发多模型管理、Text2SQL效果优化、RAG框架以及优化、Multi-Agents框架协作等多种技术能力，让围绕数据库构建大模型应用更简单，更方便。 
+## BAIZEAI(白泽智语) 是什么？
+白泽智语是一个开源的数据库领域大模型框架。目的是构建大模型领域的基础设施，通过开发多模型管理、Text2SQL效果优化、RAG框架以及优化、Multi-Agents框架协作等多种技术能力，让围绕数据库构建大模型应用更简单，更方便。 
 
 数据3.0 时代，基于模型、数据库，企业/开发者可以用更少的代码搭建自己的专属应用。
 
@@ -51,7 +20,7 @@ DB-GPT是一个开源的数据库领域大模型框架。目的是构建大模�
 - [路线图](#路线图)
 - [联系我们](#联系我们)
 
-[DB-GPT视频介绍](https://www.bilibili.com/video/BV1au41157bj/?spm_id_from=333.337.search-card.all.click&vd_source=7792e22c03b7da3c556a450eb42c8a0f)
+[白泽智语视频介绍](https://www.bilibili.com/video/BV1au41157bj/?spm_id_from=333.337.search-card.all.click&vd_source=7792e22c03b7da3c556a450eb42c8a0f)
 
 ## 效果演示
 
@@ -103,7 +72,7 @@ DB-GPT是一个开源的数据库领域大模型框架。目的是构建大模�
 
 - **自动化微调**
 
-  围绕大语言模型、Text2SQL数据集、LoRA/QLoRA/Pturning等微调方法构建的自动化微调轻量框架, 让TextSQL微调像流水线一样方便。详见: [DB-GPT-Hub](https://github.com/eosphoros-ai/DB-GPT-Hub)
+  围绕大语言模型、Text2SQL数据集、LoRA/QLoRA/Pturning等微调方法构建的自动化微调轻量框架, 让TextSQL微调像流水线一样方便。详见: [白泽智语-Hub](https://github.com/eosphoros-ai/白泽智语-Hub)
 
 - **数据驱动的Agents插件**
 
@@ -138,23 +107,23 @@ DB-GPT是一个开源的数据库领域大模型框架。目的是构建大模�
 
 
 ## 架构方案
-整个DB-GPT的架构，如下图所示
+整个白泽智语的架构，如下图所示
 <p align="center">
   <img src="./assets/DB-GPT_zh.png" width="800px" />
 </p>
 
 核心能力主要有以下几个部分:
-- **RAG(Retrieval Augmented Generation)**，RAG是当下落地实践最多，也是最迫切的领域，DB-GPT目前已经实现了一套基于RAG的框架，用户可以基于DB-GPT的RAG能力构建知识类应用。 
+- **RAG(Retrieval Augmented Generation)**，RAG是当下落地实践最多，也是最迫切的领域，白泽智语目前已经实现了一套基于RAG的框架，用户可以基于白泽智语的RAG能力构建知识类应用。 
 
-- **GBI**：生成式BI是DB-GPT项目的核心能力之一，为构建企业报表分析、业务洞察提供基础的数智化技术保障。 
+- **GBI**：生成式BI是白泽智语项目的核心能力之一，为构建企业报表分析、业务洞察提供基础的数智化技术保障。 
 
-- **微调框架**:  模型微调是任何一个企业在垂直、细分领域落地不可或缺的能力，DB-GPT提供了完整的微调框架，实现与DB-GPT项目的无缝打通，在最近的微调中，基于spider的准确率已经做到了82.5%
+- **微调框架**:  模型微调是任何一个企业在垂直、细分领域落地不可或缺的能力，白泽智语提供了完整的微调框架，实现与白泽智语项目的无缝打通，在最近的微调中，基于spider的准确率已经做到了82.5%
 
-- **数据驱动的Multi-Agents框架**:  DB-GPT提供了数据驱动的自进化微调框架，目标是可以持续基于数据做决策与执行。 
+- **数据驱动的Multi-Agents框架**:  白泽智语提供了数据驱动的自进化微调框架，目标是可以持续基于数据做决策与执行。 
 
 - **数据工厂**: 数据工厂主要是在大模型时代，做可信知识、数据的清洗加工。 
 
-- **数据源**: 对接各类数据源，实现生产业务数据无缝对接到DB-GPT核心能力。 
+- **数据源**: 对接各类数据源，实现生产业务数据无缝对接到白泽智语核心能力。 
 
 ### RAG生产落地实践架构
 <p align="center">
@@ -162,13 +131,13 @@ DB-GPT是一个开源的数据库领域大模型框架。目的是构建大模�
 </p>
 
 ### 子模块
-- [DB-GPT-Hub](https://github.com/csunny/DB-GPT-Hub) 通过微调来持续提升Text2SQL效果 
-- [DB-GPT-Plugins](https://github.com/csunny/DB-GPT-Plugins) DB-GPT 插件仓库, 兼容Auto-GPT
-- [DB-GPT-Web](https://github.com/csunny/DB-GPT-Web)  多端交互前端界面
+- [白泽智语-Hub](https://github.com/csunny/白泽智语-Hub) 通过微调来持续提升Text2SQL效果 
+- [白泽智语-Plugins](https://github.com/csunny/白泽智语-Plugins) 白泽智语 插件仓库, 兼容Auto-GPT
+- [白泽智语-Web](https://github.com/csunny/白泽智语-Web)  多端交互前端界面
 
 ## Image
 
-🌐 [AutoDL镜像](https://www.codewithgpu.com/i/eosphoros-ai/DB-GPT/dbgpt)
+🌐 [AutoDL镜像](https://www.codewithgpu.com/i/eosphoros-ai/白泽智语/dbgpt)
 
 🌐 [小程序云部署](https://www.yuque.com/eosphoros/dbgpt-docs/ek12ly8k661tbyn8)
 
@@ -270,7 +239,7 @@ The MIT License (MIT)
 - [ ] Excel + DB库表的测试评估
 
 ### 成本与可观测性 
-- [x] [debugging](https://db-gpt.readthedocs.io/en/latest/getting_started/observability.html)
+- [x] [debugging](https://白泽智语.readthedocs.io/en/latest/getting_started/observability.html)
 - [ ] 可观测性
 - [ ] 推理预算
 
@@ -291,25 +260,6 @@ The MIT License (MIT)
 -  SFT模型准确率 
 截止20231010，我们利用本项目基于开源的13B大小的模型微调后，在Spider的评估集上的执行准确率，已经超越GPT-4!
 
-[More Information about Text2SQL finetune](https://github.com/eosphoros-ai/DB-GPT-Hub)
+[More Information about Text2SQL finetune](https://github.com/eosphoros-ai/白泽智语-Hub)
 
-## 引用
-如果您发现`DB-GPT`对您的研究或开发有用，请引用以下<a href="https://arxiv.org/abs/2312.17449" target="_blank">论文</a>：
 
-```bibtex
-@article{xue2023dbgpt,
-      title={DB-GPT: Empowering Database Interactions with Private Large Language Models}, 
-      author={Siqiao Xue and Caigao Jiang and Wenhui Shi and Fangyin Cheng and Keting Chen and Hongjun Yang and Zhiping Zhang and Jianshan He and Hongyang Zhang and Ganglin Wei and Wang Zhao and Fan Zhou and Danrui Qi and Hong Yi and Shaodong Liu and Faqiang Chen},
-      year={2023},
-      journal={arXiv preprint arXiv:2312.17449},
-      url={https://arxiv.org/abs/2312.17449}
-}
-```
-
-## 联系我们
-
-<p align="center">
-  <img src="./assets/wechat.jpg" width="300px" />
-</p>
-
-[![Star History Chart](https://api.star-history.com/svg?repos=csunny/DB-GPT&type=Date)](https://star-history.com/#csunny/DB-GPT)

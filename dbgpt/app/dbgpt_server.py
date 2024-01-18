@@ -46,8 +46,8 @@ static_file_path = os.path.join(ROOT_PATH, "dbgpt", "app/static")
 CFG = Config()
 
 app = FastAPI(
-    title="DBGPT OPEN API",
-    description="This is dbgpt, with auto docs for the API and everything",
+    title="BAIZEAI OPEN API",
+    description="This is baizeai, with auto docs for the API and everything",
     version="0.5.0",
     openapi_tags=[],
 )
