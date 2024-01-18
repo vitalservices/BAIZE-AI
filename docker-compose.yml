@@ -17,6 +17,22 @@ services:
     restart: unless-stopped
     networks:
       - baizenet
+  controller:
+    image: baizeai/baize-ai:latest
+    command: dbgpt start controller
+    restart: unless-stopped
+    networks:
+      - baizenet
+  api-server:
+    image: baizeai/baize-ai:latest
+    command: dbgpt start apiserver --controller_addr http://controller:8000
+    restart: unless-stopped
+    depends_on:
+      - controller
+    networks:
+      - baizenet
+    ports:
+      - 8100:8100/tcp
   webserver:
     image: baizeai/baize-ai:latest
     command: python3 dbgpt/app/dbgpt_server.py --disable_alembic_upgrade
@@ -34,7 +50,7 @@ services:
       - LLM_MODEL=tongyi_proxyllm
       - TONGYI_PROXY_API_KEY=sk-1aa230e037da496da22eb0fe46b3580a
       - PROXY_SERVER_URL=https://openai-proxy-6kf.pages.dev/v1/chat/completions
-      - MODEL_SERVER=http://127.0.0.1:8000
+      - MODEL_SERVER=http://controller:8000
       - LIMIT_MODEL_CONCURRENCY=5
       - MAX_POSITION_EMBEDDINGS=4096
       # EMBEDDING SETTINGS EMBEDDING MODELS
@@ -56,6 +72,7 @@ services:
       - LANGUAGE=zh
     depends_on:
       - db
+      - controller
     volumes:
       - app-data:/data  
       # Please modify it to your own model directory
