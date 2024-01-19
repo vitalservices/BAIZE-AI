@@ -400,7 +400,9 @@ class KnowledgeService:
         assembler = SummaryAssembler(
             knowledge=knowledge,
             model_name=request.model_name,
-            llm_client=DefaultLLMClient(worker_manager=worker_manager),
+            llm_client=DefaultLLMClient(
+                worker_manager=worker_manager, auto_convert_message=True
+            ),
             language=CFG.LANGUAGE,
             chunk_parameters=chunk_parameters,
         )
@@ -496,30 +498,6 @@ class KnowledgeService:
         res.total = document_chunk_dao.get_document_chunks_count(query)
         res.page = request.page
         return res
-
-    def async_knowledge_graph(self, chunk_docs, doc):
-        """async document extract triplets and save into graph db
-        Args:
-            - chunk_docs: List[Document]
-            - doc: KnowledgeDocumentEntity
-        """
-        logger.info(
-            f"async_knowledge_graph, doc:{doc.doc_name}, chunk_size:{len(chunk_docs)}, begin embedding to graph store"
-        )
-        try:
-            from dbgpt.rag.graph.graph_factory import RAGGraphFactory
-
-            rag_engine = CFG.SYSTEM_APP.get_component(
-                ComponentType.RAG_GRAPH_DEFAULT.value, RAGGraphFactory
-            ).create()
-            rag_engine.knowledge_graph(chunk_docs)
-            doc.status = SyncStatus.FINISHED.name
-            doc.result = "document build graph success"
-        except Exception as e:
-            doc.status = SyncStatus.FAILED.name
-            doc.result = "document build graph failed" + str(e)
-            logger.error(f"document build graph failed:{doc.doc_name}, {str(e)}")
-        return knowledge_document_dao.update_knowledge_document(doc)
 
     def async_doc_embedding(self, assembler, chunk_docs, doc):
         """async document embedding into vector db
