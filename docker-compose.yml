@@ -25,7 +25,7 @@ services:
       - baizenet
   api-server:
     image: baizeai/baize-ai:latest
-    command: dbgpt start apiserver --controller_addr http://controller:8000
+    command: dbgpt start apiserver --controller_addr http://controller:8000 --api_keys EMPTY
     restart: unless-stopped
     depends_on:
       - controller
@@ -33,6 +33,48 @@ services:
       - baizenet
     ports:
       - 8100:8100/tcp
+  llm-worker:
+    image: baizeai/baize-ai:latest
+    command: dbgpt start worker --model_name chatglm3-6b --model_path /app/models/chatglm3-6b --load_8bit --port 8001 --controller_addr http://controller:8000
+    environment:
+      - DBGPT_LOG_LEVEL=DEBUG
+      #- QUANTIZE_8bit=True
+    depends_on:
+      - controller
+    volumes:
+      - pilot-data:/data
+      # Please modify it to your own model directory
+      - ./models:/app/models
+    restart: unless-stopped
+    networks:
+      - baizenet
+    ipc: host
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
+  embedding-worker:
+    image: baizeai/baize-ai:latest
+    command: dbgpt start worker --model_name bge-large-zh --worker_type text2vec --model_path /app/models/bge-large-zh --port 8002 --controller_addr http://controller:8000
+    environment:
+      - DBGPT_LOG_LEVEL=DEBUG
+    depends_on:
+      - controller
+    volumes:
+      - pilot-data:/data
+      # Please modify it to your own model directory
+      - ./models:/app/models
+    restart: unless-stopped
+    networks:
+      - baizenet
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
   webserver:
     image: baizeai/baize-ai:latest
     command: python3 dbgpt/app/dbgpt_server.py --disable_alembic_upgrade
@@ -49,7 +91,7 @@ services:
       # LLM MODELS
       - LLM_MODEL=tongyi_proxyllm
       - TONGYI_PROXY_API_KEY=sk-1aa230e037da496da22eb0fe46b3580a
-      - PROXY_SERVER_URL=https://openai-proxy-6kf.pages.dev/v1/chat/completions
+      - PROXY_SERVER_URL=https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation
       - MODEL_SERVER=http://controller:8000
       - LIMIT_MODEL_CONCURRENCY=5
       - MAX_POSITION_EMBEDDINGS=4096
@@ -73,6 +115,8 @@ services:
     depends_on:
       - db
       - controller
+      - llm-worker   
+      - embedding-worker   
     volumes:
       - app-data:/data  
       # Please modify it to your own model directory

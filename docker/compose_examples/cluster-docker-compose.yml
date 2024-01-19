@@ -40,7 +40,7 @@ services:
               capabilities: [gpu]
   embedding-worker:
     image: eosphorosai/dbgpt:latest
-    command: dbgpt start worker --model_name text2vec --worker_type text2vec --model_path /app/models/text2vec-large-chinese --port 8002 --controller_addr http://controller:8000
+    command: dbgpt start worker --model_name bge-large-zh --worker_type text2vec --model_path /app/models/bge-large-zh --port 8002 --controller_addr http://controller:8000
     environment:
       - DBGPT_LOG_LEVEL=DEBUG
     depends_on:
