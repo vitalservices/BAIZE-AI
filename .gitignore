@@ -187,3 +187,6 @@ thirdparty
 # docker files
 Dockerfile
 baizeai/
+
+# web static files
+dbgpt/app/static

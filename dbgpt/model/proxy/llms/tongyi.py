@@ -13,33 +13,14 @@ logger = logging.getLogger(__name__)
 def tongyi_generate_stream(
     model: ProxyModel, tokenizer, params, device, context_len=2048
 ):
-    import dashscope
-    from dashscope import Generation
-
-    model_params = model.get_params()
-    print(f"Model: {model}, model_params: {model_params}")
-
-    proxy_api_key = model_params.proxy_api_key
-    dashscope.api_key = proxy_api_key
-
-    proxyllm_backend = model_params.proxyllm_backend
-    if not proxyllm_backend:
-        proxyllm_backend = Generation.Models.qwen_max  # 缺省由qwen_turbo修改为qwen_max，当前免费使用
-
-    messages: List[ModelMessage] = params["messages"]
-    convert_to_compatible_format = params.get("convert_to_compatible_format", False)
-
-    if convert_to_compatible_format:
-        history = __convert_2_tongyi_messages(messages)
-    else:
-        history = ModelMessage.to_openai_messages(messages)
-    gen = Generation()
-    res = gen.call(
-        proxyllm_backend,
-        messages=history,
-        top_p=params.get("top_p", 0.8),
-        stream=True,
-        result_format="message",
+    client: TongyiLLMClient = model.proxy_llm_client
+    context = ModelRequestContext(stream=True, user_name=params.get("user_name"))
+    request = ModelRequest.build_request(
+        client.default_model,
+        messages=params["messages"],
+        temperature=params.get("temperature"),
+        context=context,
+        max_new_tokens=params.get("max_new_tokens"),
     )
     for r in client.sync_generate_stream(request):
         yield r
@@ -64,7 +45,7 @@ class TongyiLLMClient(ProxyLLMClient):
                 "Please install dashscope by command `pip install dashscope"
             ) from exc
         if not model:
-            model = Generation.Models.qwen_turbo
+            model = Generation.Models.qwen-max # 使用qwen-max，限时免费
         if api_key:
             dashscope.api_key = api_key
         if api_region:
