@@ -12,54 +12,9 @@
 
 ## 目录
 
-- [安装](#安装)
-- [效果演示](#效果演示)
 - [架构方案](#架构方案)
 - [特性简介](#特性一览)
-- [贡献](#贡献)
 - [路线图](#路线图)
-- [联系我们](#联系我们)
-
-[白泽智语视频介绍](https://www.bilibili.com/video/BV1au41157bj/?spm_id_from=333.337.search-card.all.click&vd_source=7792e22c03b7da3c556a450eb42c8a0f)
-
-## 效果演示
-
-##### Chat Data
-![chatdata](https://github.com/eosphoros-ai/DB-GPT/assets/13723926/1f77079e-d018-4eee-982b-9b6a66bf1063)
-
-##### Chat Excel
-![excel](https://github.com/eosphoros-ai/DB-GPT/assets/13723926/3044e83b-a71e-41fe-a1e2-98e479e0ab59)
-
-#### 根据自然语言对话生成分析图表
-<p align="left">
-  <img src="./assets/dashboard.png" width="800px" />
-</p>
-
-## 安装
-
-![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
-![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
-![macOS](https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=macos&logoColor=F0F0F0)
-![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
-
-[**教程**](https://www.yuque.com/eosphoros/dbgpt-docs/bex30nsv60ru0fmx)
-- [**快速开始**](https://www.yuque.com/eosphoros/dbgpt-docs/ew0kf1plm0bru2ga)
-  - [**源码安装**](https://www.yuque.com/eosphoros/dbgpt-docs/urh3fcx8tu0s9xmb)
-  - [**Docker安装**](https://www.yuque.com/eosphoros/dbgpt-docs/glf87qg4xxcyrp89)
-  - [**Docker Compose安装**](https://www.yuque.com/eosphoros/dbgpt-docs/wwdu11e0v5nkfzin)
-- [**使用手册**](https://www.yuque.com/eosphoros/dbgpt-docs/tkspdd0tcy2vlnu4)
-  - [**知识库**](https://www.yuque.com/eosphoros/dbgpt-docs/ycyz3d9b62fccqxh)
-  - [**数据对话**](https://www.yuque.com/eosphoros/dbgpt-docs/gd9hbhi1dextqgbz)
-  - [**Excel对话**](https://www.yuque.com/eosphoros/dbgpt-docs/prugoype0xd2g4bb)
-  - [**数据库对话**](https://www.yuque.com/eosphoros/dbgpt-docs/wswpv3zcm2c9snmg)
-  - [**报表分析**](https://www.yuque.com/eosphoros/dbgpt-docs/vsv49p33eg4p5xc1)
-  - [**插件**](https://www.yuque.com/eosphoros/dbgpt-docs/pom41m7oqtdd57hm)
-- [**模型服务部署**](https://www.yuque.com/eosphoros/dbgpt-docs/vubxiv9cqed5mc6o)
-  - [**单机部署**](https://www.yuque.com/eosphoros/dbgpt-docs/kwg1ed88lu5fgawb)
-  - [**集群部署**](https://www.yuque.com/eosphoros/dbgpt-docs/gmbp9619ytyn2v1s)
-  - [**vLLM**](https://www.yuque.com/eosphoros/dbgpt-docs/bhy9igdvanx1uluf)
-- [**如何Debug**](https://www.yuque.com/eosphoros/dbgpt-docs/eyg0ocbc2ce3q95r)
-- [**FAQ**](https://www.yuque.com/eosphoros/dbgpt-docs/gomtc46qonmyt44l)
 
 ## 特性一览
 - **私域问答&数据处理&RAG**
@@ -72,7 +27,7 @@
 
 - **自动化微调**
 
-  围绕大语言模型、Text2SQL数据集、LoRA/QLoRA/Pturning等微调方法构建的自动化微调轻量框架, 让TextSQL微调像流水线一样方便。详见: [白泽智语-Hub](https://github.com/eosphoros-ai/白泽智语-Hub)
+  围绕大语言模型、Text2SQL数据集、LoRA/QLoRA/Pturning等微调方法构建的自动化微调轻量框架, 让TextSQL微调像流水线一样方便。
 
 - **数据驱动的Agents插件**
 
@@ -87,8 +42,6 @@
     - 🔥🔥🔥  [Mixtral-8x7B](https://huggingface.co/mistralai/Mixtral-8x7B-Instruct-v0.1)
     - 🔥🔥🔥  [Qwen-72B-Chat](https://huggingface.co/Qwen/Qwen-72B-Chat)
     - 🔥🔥🔥  [Yi-34B-Chat](https://huggingface.co/01-ai/Yi-34B-Chat)
-  - [更多开源模型](https://www.yuque.com/eosphoros/dbgpt-docs/iqaaqwriwhp6zslc#qQktR)
-
   - 支持在线代理模型 
     - [x] [OpenAI·ChatGPT](https://api.openai.com/)
     - [x] [百川·Baichuan](https://platform.baichuan-ai.com/)
@@ -98,12 +51,10 @@
     - [x] [讯飞·星火](https://xinghuo.xfyun.cn/)
     - [x] [Google·Bard](https://bard.google.com/)
     - [x] [Google·Gemini](https://makersuite.google.com/app/apikey)
-
+  
 - **隐私安全**
 
   通过私有化大模型、代理脱敏等多种技术保障数据的隐私安全。
-
-- [支持数据源](https://www.yuque.com/eosphoros/dbgpt-docs/rc4r27ybmdwg9472)
 
 
 ## 架构方案
@@ -129,36 +80,9 @@
 <p align="center">
   <img src="./assets/RAG-IN-ACTION.jpg" width="800px" />
 </p>
-
-### 子模块
-- [白泽智语-Hub](https://github.com/csunny/白泽智语-Hub) 通过微调来持续提升Text2SQL效果 
-- [白泽智语-Plugins](https://github.com/csunny/白泽智语-Plugins) 白泽智语 插件仓库, 兼容Auto-GPT
-- [白泽智语-Web](https://github.com/csunny/白泽智语-Web)  多端交互前端界面
-
-## Image
-
-🌐 [AutoDL镜像](https://www.codewithgpu.com/i/eosphoros-ai/白泽智语/dbgpt)
-
-🌐 [小程序云部署](https://www.yuque.com/eosphoros/dbgpt-docs/ek12ly8k661tbyn8)
-
 ### 多语言切换
 
 在.env 配置文件当中，修改LANGUAGE参数来切换使用不同的语言，默认是英文(中文zh, 英文en, 其他语言待补充)
-
-## 使用说明
-
-### 多模型使用
-
-[使用指南](https://www.yuque.com/eosphoros/dbgpt-docs/huzgcf2abzvqy8uv)
-
-# 贡献
-> 提交代码前请先执行 `black .`
-
-这是一个用于数据库的复杂且创新的工具, 我们的项目也在紧急的开发当中, 会陆续发布一些新的feature。如在使用当中有任何具体问题, 优先在项目下提issue, 如有需要, 请联系如下微信，我会尽力提供帮助，同时也非常欢迎大家参与到项目建设中。
-
-## Licence
-
-The MIT License (MIT)
 
 # 路线图
 
@@ -214,9 +138,9 @@ The MIT License (MIT)
 
 
 ### 多模型管理与推理优化
-- [x] [集群部署](https://www.yuque.com/eosphoros/dbgpt-docs/gmbp9619ytyn2v1s)
-- [x] [fastchat支持](https://github.com/lm-sys/FastChat)
-- [x] [vLLM 支持](https://www.yuque.com/eosphoros/dbgpt-docs/bhy9igdvanx1uluf)
+- [x] 集群部署
+- [x] fastchat支持
+- [x] vLLM 支持
 - [x] 上层接口兼容Openai
 - [ ] 云原生环境与Ray环境支持
 - [ ] 注册中心引入nacos
@@ -239,7 +163,7 @@ The MIT License (MIT)
 - [ ] Excel + DB库表的测试评估
 
 ### 成本与可观测性 
-- [x] [debugging](https://白泽智语.readthedocs.io/en/latest/getting_started/observability.html)
+- [x] debugging
 - [ ] 可观测性
 - [ ] 推理预算
 
@@ -259,7 +183,3 @@ The MIT License (MIT)
 
 -  SFT模型准确率 
 截止20231010，我们利用本项目基于开源的13B大小的模型微调后，在Spider的评估集上的执行准确率，已经超越GPT-4!
-
-[More Information about Text2SQL finetune](https://github.com/eosphoros-ai/白泽智语-Hub)
-
-

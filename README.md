@@ -1,179 +1,120 @@
-# DB-GPT: Revolutionizing Database Interactions with Private LLM Technology
- 
+# 白泽智语: 用私有化LLM技术定义下一代交互方式
+
 <p align="left">
   <img src="./assets/LOGO.png" width="100%" />
 </p>
 
-<div align="center">
-  <p>
-    <a href="https://github.com/eosphoros-ai/DB-GPT">
-        <img alt="stars" src="https://img.shields.io/github/stars/eosphoros-ai/db-gpt?style=social" />
-    </a>
-    <a href="https://github.com/eosphoros-ai/DB-GPT">
-        <img alt="forks" src="https://img.shields.io/github/forks/eosphoros-ai/db-gpt?style=social" />
-    </a>
-    <a href="https://opensource.org/licenses/MIT">
-      <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
-    </a>
-     <a href="https://github.com/eosphoros-ai/DB-GPT/releases">
-      <img alt="Release Notes" src="https://img.shields.io/github/release/eosphoros-ai/DB-GPT" />
-    </a>
-    <a href="https://github.com/eosphoros-ai/DB-GPT/issues">
-      <img alt="Open Issues" src="https://img.shields.io/github/issues-raw/eosphoros-ai/DB-GPT" />
-    </a>
-    <a href="https://discord.gg/7uQnPuveTY">
-      <img alt="Discord" src="https://dcbadge.vercel.app/api/server/7uQnPuveTY?compact=true&style=flat" />
-    </a>
-    <a href="https://join.slack.com/t/slack-inu2564/shared_invite/zt-29rcnyw2b-N~ubOD9kFc7b7MDOAM1otA">
-      <img alt="Slack" src="https://badgen.net/badge/Slack/Join%20DB-GPT/0abd59?icon=slack" />
-    </a>
-    <a href="https://codespaces.new/eosphoros-ai/DB-GPT">
-      <img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" />
-    </a>
-  </p>
 
 
-[**简体中文**](README.zh.md) | [**Discord**](https://discord.gg/7uQnPuveTY) | [**Documents**](https://docs.dbgpt.site) | [**Wechat**](https://github.com/eosphoros-ai/DB-GPT/blob/main/README.zh.md#%E8%81%94%E7%B3%BB%E6%88%91%E4%BB%AC) | [**Community**](https://github.com/eosphoros-ai/community) | [**Paper**](https://arxiv.org/pdf/2312.17449.pdf)
+## BAIZEAI(白泽智语) 是什么？
 
-</div>
+白泽智语是一个开源的数据库领域大模型框架。目的是构建大模型领域的基础设施，通过开发多模型管理、Text2SQL效果优化、RAG框架以及优化、Multi-Agents框架协作等多种技术能力，让围绕数据库构建大模型应用更简单，更方便。 
 
-## What is DB-GPT?
+数据3.0 时代，基于模型、数据库，企业/开发者可以用更少的代码搭建自己的专属应用。
 
-DB-GPT is an open-source framework designed for the realm of large language models (LLMs) within the database field. Its primary purpose is to provide infrastructure that simplifies and streamlines the development of database-related applications. This is accomplished through the development of various technical capabilities, including:
+## 目录
 
-1. **SMMF(Service-oriented Multi-model Management Framework)**
-2. **Text2SQL Fine-tuning**
-3. **RAG(Retrieval Augmented Generation) framework and optimization**
-4. **Data-Driven Agents framework collaboration**
-5. **GBI(Generative Business intelligence)**
+- [架构方案](#架构方案)
+- [特性简介](#特性一览)
+- [路线图](#路线图)
 
-DB-GPT simplifies the creation of these applications based on large language models (LLMs) and databases. 
+## 特性一览
 
-In the era of Data 3.0, enterprises and developers can take the ability to create customized applications with minimal coding, which harnesses the power of large language models (LLMs) and databases.
+- **私域问答&数据处理&RAG**
 
+  支持内置、多文件格式上传、插件自抓取等方式自定义构建知识库，对海量结构化，非结构化数据做统一向量存储与检索
 
-## Contents
-- [Install](#install)
-- [Demo](#demo)
-- [Introduction](#introduction)
-- [Features](#features)
-- [Contribution](#contribution)
-- [Roadmap](#roadmap)
-- [Contact](#contact-information)
+- **多数据源&GBI**
 
-[DB-GPT Youtube Video](https://www.youtube.com/watch?v=f5_g0OObZBQ)
+  支持自然语言与Excel、数据库、数仓等多种数据源交互，并支持分析报告。
 
-## Demo
-##### Chat Data
-![chatdata](https://github.com/eosphoros-ai/DB-GPT/assets/13723926/1f77079e-d018-4eee-982b-9b6a66bf1063)
+- **自动化微调**
 
-##### Chat Excel
-![excel](https://github.com/eosphoros-ai/DB-GPT/assets/13723926/3044e83b-a71e-41fe-a1e2-98e479e0ab59)
+  围绕大语言模型、Text2SQL数据集、LoRA/QLoRA/Pturning等微调方法构建的自动化微调轻量框架, 让TextSQL微调像流水线一样方便。
 
-## Install 
-![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
-![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
-![macOS](https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=macos&logoColor=F0F0F0)
-![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
+- **数据驱动的Agents插件**
 
-[**Usage Tutorial**](http://docs.dbgpt.site/docs/overview)
-- [**Install**](http://docs.dbgpt.site/docs/installation)
-- [**Quickstart**](http://docs.dbgpt.site/docs/quickstart)
-- [**Application**](http://docs.dbgpt.site/docs/operation_manual)
-- [**Debugging**](http://docs.dbgpt.site/docs/operation_manual/advanced_tutorial/debugging)
+  支持自定义插件执行任务，原生支持Auto-GPT插件模型，Agents协议采用Agent Protocol标准
 
+- **多模型支持与管理**
 
-## Features
+  海量模型支持，包括开源、API代理等几十种大语言模型。如LLaMA/LLaMA2、Baichuan、ChatGLM、文心、通义、智谱等。当前已支持如下模型: 
 
-At present, we have introduced several key features to showcase our current capabilities:
-- **Private Domain Q&A & Data Processing**
-
-  The DB-GPT project offers a range of functionalities designed to improve knowledge base construction and enable efficient storage and retrieval of both structured and unstructured data. These functionalities include built-in support for uploading multiple file formats, the ability to integrate custom data extraction plug-ins, and unified vector storage and retrieval capabilities for effectively managing large volumes of information.
-
-- **Multi-Data Source & GBI(Generative Business intelligence)**
-
-  The DB-GPT project facilitates seamless natural language interaction with diverse data sources, including Excel, databases, and data warehouses. It simplifies the process of querying and retrieving information from these sources, empowering users to engage in intuitive conversations and gain insights. Moreover, DB-GPT supports the generation of analytical reports, providing users with valuable data summaries and interpretations.
-
-- **Multi-Agents&Plugins**
-
-  It offers support for custom plug-ins to perform various tasks and natively integrates the Auto-GPT plug-in model. The Agents protocol adheres to the Agent Protocol standard.
-
-- **Automated Fine-tuning text2SQL**
-
-  We've also developed an automated fine-tuning lightweight framework centred on large language models (LLMs), Text2SQL datasets, LoRA/QLoRA/Pturning, and other fine-tuning methods. This framework simplifies Text-to-SQL fine-tuning, making it as straightforward as an assembly line process. [DB-GPT-Hub](https://github.com/eosphoros-ai/DB-GPT-Hub)
-
-- **SMMF(Service-oriented Multi-model Management Framework)**
-
-  We offer extensive model support, including dozens of large language models (LLMs) from both open-source and API agents, such as LLaMA/LLaMA2, Baichuan, ChatGLM, Wenxin, Tongyi, Zhipu, and many more. 
-
-  - News
+  - 新增支持模型
     - 🔥🔥🔥  [SOLAR-10.7B](https://huggingface.co/upstage/SOLAR-10.7B-Instruct-v1.0)
     - 🔥🔥🔥  [Mixtral-8x7B](https://huggingface.co/mistralai/Mixtral-8x7B-Instruct-v0.1)
     - 🔥🔥🔥  [Qwen-72B-Chat](https://huggingface.co/Qwen/Qwen-72B-Chat)
     - 🔥🔥🔥  [Yi-34B-Chat](https://huggingface.co/01-ai/Yi-34B-Chat)
-  - [More Supported LLMs](http://docs.dbgpt.site/docs/modules/smmf)
+  - 支持在线代理模型 
+    - [x] [OpenAI·ChatGPT](https://api.openai.com/)
+    - [x] [百川·Baichuan](https://platform.baichuan-ai.com/)
+    - [x] [阿里·通义](https://www.aliyun.com/product/dashscope)
+    - [x] [百度·文心](https://cloud.baidu.com/product/wenxinworkshop?track=dingbutonglan)
+    - [x] [智谱·ChatGLM](http://open.bigmodel.cn/)
+    - [x] [讯飞·星火](https://xinghuo.xfyun.cn/)
+    - [x] [Google·Bard](https://bard.google.com/)
+    - [x] [Google·Gemini](https://makersuite.google.com/app/apikey)
 
-- **Privacy and Security**
-  
-  We ensure the privacy and security of data through the implementation of various technologies, including privatized large models and proxy desensitization.
+- **隐私安全**
 
-- Support Datasources
-  - [Datasources](http://docs.dbgpt.site/docs/modules/connections)
+  通过私有化大模型、代理脱敏等多种技术保障数据的隐私安全。
 
-## Introduction 
-The architecture of DB-GPT is shown in the following figure:
+
+## 架构方案
+
+整个白泽智语的架构，如下图所示
 
 <p align="center">
-  <img src="./assets/DB-GPT.png" width="800" />
+  <img src="./assets/DB-GPT_zh.png" width="800px" />
 </p>
 
-The core capabilities primarily consist of the following components:
-1. Multi-Models: We support multiple Large Language Models (LLMs) such as LLaMA/LLaMA2, CodeLLaMA, ChatGLM, QWen, Vicuna, and proxy models like ChatGPT, Baichuan, Tongyi, Wenxin, and more.
-2. Knowledge-Based QA: Our system enables high-quality intelligent Q&A based on local documents such as PDFs, Word documents, Excel files, and other data sources.
-3. Embedding: We offer unified data vector storage and indexing. Data is embedded as vectors and stored in vector databases, allowing for content similarity search.
-4. Multi-Datasources: This feature connects different modules and data sources, facilitating data flow and interaction.
-5. Multi-Agents: Our platform provides Agent and plugin mechanisms, empowering users to customize and enhance the system's behaviour.
-6. Privacy & Security: Rest assured that there is no risk of data leakage, and your data is 100% private and secure.
-7. Text2SQL: We enhance Text-to-SQL performance through Supervised Fine-Tuning (SFT) applied to Large Language Models (LLMs).
 
-### SubModule
-- [DB-GPT-Hub](https://github.com/eosphoros-ai/DB-GPT-Hub) Text-to-SQL workflow with high performance by applying Supervised Fine-Tuning (SFT) on Large Language Models (LLMs).
-- [DB-GPT-Plugins](https://github.com/eosphoros-ai/DB-GPT-Plugins) DB-GPT Plugins that can run Auto-GPT plugin directly
-- [DB-GPT-Web](https://github.com/eosphoros-ai/DB-GPT-Web)  ChatUI for DB-GPT  
+核心能力主要有以下几个部分:
 
-## Image
-🌐 [AutoDL Image](https://www.codewithgpu.com/i/eosphoros-ai/DB-GPT/dbgpt)
+- **RAG(Retrieval Augmented Generation)**，RAG是当下落地实践最多，也是最迫切的领域，白泽智语目前已经实现了一套基于RAG的框架，用户可以基于白泽智语的RAG能力构建知识类应用。 
 
+- **GBI**：生成式BI是白泽智语项目的核心能力之一，为构建企业报表分析、业务洞察提供基础的数智化技术保障。 
 
-### Language Switching
-    In the .env configuration file, modify the LANGUAGE parameter to switch to different languages. The default is English (Chinese: zh, English: en, other languages to be added later).
+- **微调框架**:  模型微调是任何一个企业在垂直、细分领域落地不可或缺的能力，白泽智语提供了完整的微调框架，实现与白泽智语项目的无缝打通，在最近的微调中，基于spider的准确率已经做到了82.5%
 
-## Contribution
+- **数据驱动的Multi-Agents框架**:  白泽智语提供了数据驱动的自进化微调框架，目标是可以持续基于数据做决策与执行。 
 
-- Please run `black .` before submitting the code.
-- To check detailed guidelines for new contributions, please refer [how to contribute](https://github.com/csunny/DB-GPT/blob/main/CONTRIBUTING.md)
+- **数据工厂**: 数据工厂主要是在大模型时代，做可信知识、数据的清洗加工。 
 
-## RoadMap
+- **数据源**: 对接各类数据源，实现生产业务数据无缝对接到白泽智语核心能力。 
+
+### RAG生产落地实践架构
+
+<p align="center">
+  <img src="./assets/RAG-IN-ACTION.jpg" width="800px" />
+</p>
+
+### 多语言切换
+
+在.env 配置文件当中，修改LANGUAGE参数来切换使用不同的语言，默认是英文(中文zh, 英文en, 其他语言待补充)
+
+# 路线图
 
 <p align="left">
   <img src="./assets/roadmap.jpg" width="800px" />
 </p>
 
-### KBQA RAG optimization
+
+### 知识库RAG检索优化
+
 - [x] Multi Documents
   - [x] PDF
-  - [x] Excel, CSV
+  - [x] Excel, csv
   - [x] Word
   - [x] Text
   - [x] MarkDown
   - [ ] Code
   - [ ] Images 
-
 - [x] RAG
 - [ ] Graph Database
   - [ ] Neo4j Graph
   - [ ] Nebula Graph
-- [x] Multi-Vector Database
+- [x] Multi Vector Database
   - [x] Chroma
   - [x] Milvus
   - [x] Weaviate
@@ -181,23 +122,19 @@ The core capabilities primarily consist of the following components:
   - [ ] Elasticsearch
   - [ ] ClickHouse
   - [ ] Faiss 
-  
-- [ ] Testing and Evaluation Capability Building
-  - [ ] Knowledge QA datasets
-  - [ ] Question collection [easy, medium, hard]:
-  - [ ] Scoring mechanism
-  - [ ] Testing and evaluation using Excel + DB datasets
-  
-### Multi Datasource Support
 
-- Multi Datasource Support 
+### 多数据源支持
+
+- 支持数据源
+
   - [x] MySQL
-  - [x] PostgreSQL
+  - [x] PostgresSQL
   - [x] Spark
   - [x] DuckDB
   - [x] Sqlite
   - [x] MSSQL
   - [x] ClickHouse
+  - [x] StarRocks
   - [ ] Oracle
   - [ ] Redis
   - [ ] MongoDB
@@ -208,32 +145,44 @@ The core capabilities primarily consist of the following components:
   - [ ] Elasticsearch
   - [ ] OceanBase
   - [ ] TiDB
-  - [ ] StarRocks
 
-### Multi-Models And vLLM
-- [x] [Cluster Deployment](https://docs.dbgpt.site/docs/installation/model_service/cluster)
-- [x] [Fastchat Support](https://github.com/lm-sys/FastChat)
-- [x] [vLLM Support](https://docs.dbgpt.site/docs/installation/advanced_usage/vLLM_inference)
-- [ ] Cloud-native environment and support for Ray environment
-- [ ] Service Registry(eg:nacos)
-- [ ] Compatibility with OpenAI's interfaces
-- [ ] Expansion and optimization of embedding models
 
-### Agents market and Plugins
-- [x] multi-agents framework
-- [x] custom plugin development 
-- [x] plugin market
-- [ ] Integration with CoT
-- [ ] Enrich plugin sample library
-- [ ] Support for AutoGPT protocol
-- [ ] Integration of multi-agents and visualization capabilities, defining LLM+Vis new standards
+### 多模型管理与推理优化
 
-### Cost and Observability
-- [x] [debugging](https://docs.dbgpt.site/docs/application_manual/advanced_tutorial/debugging)
-- [ ] Observability
-- [ ] cost & budgets
+- [x] 集群部署
+- [x] fastchat支持
+- [x] vLLM 支持
+- [x] 上层接口兼容Openai
+- [ ] 云原生环境与Ray环境支持
+- [ ] 注册中心引入nacos
+- [ ] Embedding模型扩充，优化
 
-### Text2SQL Finetune
+### Agents与插件市场
+
+- [x] 多Agents框架
+- [x] 自定义Agents
+- [x] 插件市场
+- [ ] CoT集成
+- [ ] 丰富插件样本库
+- [ ] 支持AutoGPT协议
+- [ ] Multi-agents & 可视化能力打通，定义LLM+Vis新标准
+
+
+### 测试评估能力建设
+
+- [ ] 知识库的数据文本集
+- [ ] 问题集合 [easy、medium、hard]
+- [ ] 评分机制
+- [ ] Excel + DB库表的测试评估
+
+### 成本与可观测性 
+
+- [x] debugging
+- [ ] 可观测性
+- [ ] 推理预算
+
+### Text2SQL微调
+
 - support llms
   - [x] LLaMA
   - [x] LLaMA-2
@@ -247,33 +196,5 @@ The core capabilities primarily consist of the following components:
   - [x] XVERSE
   - [x] ChatGLM2
 
--  SFT Accuracy
-As of October 10, 2023, through the fine-tuning of an open-source model with 13 billion parameters using this project, we have achieved execution accuracy on the Spider dataset that surpasses even GPT-4!
-
-[More Information about Text2SQL finetune](https://github.com/eosphoros-ai/DB-GPT-Hub)
-
-## Licence
-The MIT License (MIT)
-
-## Citation
-If you find `DB-GPT` useful for your research or development, please cite the following <a href="https://arxiv.org/abs/2312.17449" target="_blank">paper</a>:
-
-```bibtex
-@article{xue2023dbgpt,
-      title={DB-GPT: Empowering Database Interactions with Private Large Language Models}, 
-      author={Siqiao Xue and Caigao Jiang and Wenhui Shi and Fangyin Cheng and Keting Chen and Hongjun Yang and Zhiping Zhang and Jianshan He and Hongyang Zhang and Ganglin Wei and Wang Zhao and Fan Zhou and Danrui Qi and Hong Yi and Shaodong Liu and Faqiang Chen},
-      year={2023},
-      journal={arXiv preprint arXiv:2312.17449},
-      url={https://arxiv.org/abs/2312.17449}
-}
-```
-
-## Contact Information
-We are working on building a community, if you have any ideas for building the community, feel free to contact us.
-[![](https://dcbadge.vercel.app/api/server/7uQnPuveTY?compact=true&style=flat)](https://discord.gg/7uQnPuveTY)
-
-<p align="center">
-  <img src="./assets/wechat.jpg" width="300px" />
-</p>
-
-[![Star History Chart](https://api.star-history.com/svg?repos=csunny/DB-GPT&type=Date)](https://star-history.com/#csunny/DB-GPT)
+- SFT模型准确率 
+  截止20231010，我们利用本项目基于开源的13B大小的模型微调后，在Spider的评估集上的执行准确率，已经超越GPT-4!

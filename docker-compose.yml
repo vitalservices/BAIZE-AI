@@ -13,7 +13,6 @@ services:
       - db-data:/var/lib/mysql  
       - ./docker/examples/my.cnf:/etc/my.cnf:ro
       - ./docker/examples/sqls:/docker-entrypoint-initdb.d
-      - ./assets/schema/knowledge_management.sql:/docker-entrypoint-initdb.d/knowledge_management.sql
     restart: unless-stopped
     networks:
       - baizenet
@@ -33,48 +32,6 @@ services:
       - baizenet
     ports:
       - 8100:8100/tcp
-  llm-worker:
-    image: baizeai/baize-ai:latest
-    command: dbgpt start worker --model_name chatglm3-6b --model_path /app/models/chatglm3-6b --load_8bit --port 8001 --controller_addr http://controller:8000
-    environment:
-      - DBGPT_LOG_LEVEL=DEBUG
-      #- QUANTIZE_8bit=True
-    depends_on:
-      - controller
-    volumes:
-      - pilot-data:/data
-      # Please modify it to your own model directory
-      - ./models:/app/models
-    restart: unless-stopped
-    networks:
-      - baizenet
-    ipc: host
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              capabilities: [gpu]
-  embedding-worker:
-    image: baizeai/baize-ai:latest
-    command: dbgpt start worker --model_name bge-large-zh --worker_type text2vec --model_path /app/models/bge-large-zh --port 8002 --controller_addr http://controller:8000
-    environment:
-      - DBGPT_LOG_LEVEL=DEBUG
-    depends_on:
-      - controller
-    volumes:
-      - pilot-data:/data
-      # Please modify it to your own model directory
-      - ./models:/app/models
-    restart: unless-stopped
-    networks:
-      - baizenet
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              capabilities: [gpu]
   webserver:
     image: baizeai/baize-ai:latest
     command: python3 dbgpt/app/dbgpt_server.py --disable_alembic_upgrade
@@ -107,7 +64,7 @@ services:
       - EXECUTE_LOCAL_COMMANDS=False
       ### Chroma vector db config
       - VECTOR_STORE_TYPE=Chroma
-      # SUMMARY_CONFIG                                             **#
+      # SUMMARY_CONFIG
       - SUMMARY_CONFIG=FAST
       # LOG FATAL, ERROR, WARNING, WARNING, INFO, DEBUG, NOTSET
       - DBGPT_LOG_LEVEL=INFO
@@ -115,14 +72,14 @@ services:
     depends_on:
       - db
       - controller
-      - llm-worker   
-      - embedding-worker   
+      - api-server
     volumes:
       - app-data:/data  
       # Please modify it to your own model directory
       - ./models:/app/models
       - pilot-data:/app/pilot/data  
       - pilot-message:/app/pilot/message  
+      - pilot-meta:/app/pilot/meta_data
     #env_file:
     #  - .env.template
     ports:
@@ -142,7 +99,8 @@ volumes:
   db-data:  
   app-data:  
   pilot-data:  
-  pilot-message:  
+  pilot-message: 
+  pilot-meta: 
 networks:
   baizenet:
     driver: bridge

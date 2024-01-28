@@ -45,7 +45,8 @@ class TongyiLLMClient(ProxyLLMClient):
                 "Please install dashscope by command `pip install dashscope"
             ) from exc
         if not model:
-            model = Generation.Models.qwen-max # 使用qwen-max，限时免费
+            #qwen_turbo/qwen_plus/qwen_max，qwen_max限时免费
+            model = Generation.Models.qwen_max 
         if api_key:
             dashscope.api_key = api_key
         if api_region:
